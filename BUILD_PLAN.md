@@ -1,3 +1,15 @@
+## Project Intent
+
+This project builds a production-style AI analysis system, applying real-world backend and agent orchestration patterns on top of football data.
+
+The goal is to:
+- Apply real-world backend and distributed system patterns
+- Experiment with agent orchestration (LangGraph)
+- Implement concurrency, caching, and observability patterns
+- Mirror production architectures used in systems like incident RCA agents
+
+The domain (football analytics) is interchangeable — the architecture is the focus.
+
 # Build Plan — xgenie
 
 > Personal reference for building this project 1 hour/day with daily GitHub commits.
@@ -7,18 +19,22 @@
 
 ## Why this project
 
-Every component maps directly to production experience:
+Every component reflects patterns used in production-grade distributed AI systems:
 
-| This project | Production equivalent (Intuit) |
+| This project | Production pattern |
 |---|---|
-| LangGraph supervisor + parallel analyst nodes | 7-node parallel RCA graph + supervisor-orchestrated agent |
-| AnalysisCache with `asyncio.Event` | SkillCache across concurrent agent invocations |
-| Java data service as tool provider | Go MCP server with 19 diagnostic tools |
-| Langfuse tracing on all LLM calls | Langfuse across all Intuit agent workflows |
-| Multi-LLM config (cheap nodes + quality synthesis) | 12-LLM config pattern |
-| Prompt files per node (`.md`) | 40+ YAML-managed prompt store |
+| LangGraph supervisor + parallel analyst nodes | Supervisor-orchestrated workflows with parallel execution |
+| AnalysisCache with `asyncio.Event` | Concurrent request deduplication across distributed components |
+| Java data service as tool provider | External service/tool integration layer for agent workflows |
+| Langfuse tracing on all LLM calls | End-to-end observability for LLM-driven systems |
+| Multi-LLM config (cheap nodes + quality synthesis) | Cost-aware model routing and role-based LLM selection |
+| Prompt files per node (`.md`) | Centralized and modular prompt management |
 
-**Interview framing:** *"I built a football analytics agent using the same LangGraph supervisor pattern I use at Intuit for incident RCA — parallel analysis nodes, shared cache to prevent duplicate API calls, multi-LLM routing between investigator and synthesis roles. The domain is different, the architecture is identical."*
+---
+
+### Interview framing
+
+*"I built a distributed AI analysis system using a supervisor-based orchestration pattern, with parallel execution across multiple analysis nodes. The system uses shared caching to eliminate redundant API calls, integrates external services as tools, and routes between different LLMs based on task complexity. The domain is interchangeable—the focus is on replicating production-grade agent architecture and system design patterns."*
 
 ---
 
